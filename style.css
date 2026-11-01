@@ -1,0 +1,101 @@
+/* CallCleaner project page: overrides on top of Bootstrap 4 (same style as cwomp.github.io) */
+
+.title { text-align: center; margin-top: 8px; margin-bottom: 14px; }
+.abstract { text-align: justify; padding-left: 40px; padding-right: 40px; }
+.text-break { text-align: justify; font-size: 15px; margin: 8px 0; }
+.tldr { font-size: 1.05rem; text-align: justify; }
+.figure-wide { margin: 14px 0 8px; text-align: center; }
+.results-list { padding-left: 1.2rem; font-size: 15px; }
+.results-list li { margin-bottom: 8px; }
+.btn.disabled small { font-size: 70%; }
+
+/* ---------- audio examples ---------- */
+.example {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 12px 14px 10px;
+  margin: 14px 0;
+}
+.example-head { margin-bottom: 8px; }
+.example-title { font-weight: 700; font-size: 1.05rem; }
+.example-note { color: #6c757d; font-size: 0.88rem; margin-left: 6px; }
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+.tile { text-align: center; }
+.tile-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tile.ours .tile-label { color: #c45a00; }
+.spec {
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px;
+  overflow: hidden;
+  outline: 2px solid transparent;
+  transition: outline-color 0.15s;
+  line-height: 0;
+}
+.spec img { width: 100%; height: 72px; object-fit: fill; display: block; }
+.spec:hover, .spec:focus { outline-color: #9ec5fe; }
+.tile.playing .spec { outline-color: #007bff; }
+.tile.ours .spec { box-shadow: 0 0 0 2px #e8a23d inset; }
+.playhead {
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 2px;
+  background: #fff;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+  display: none;
+  pointer-events: none;
+}
+.tile.playing .playhead, .tile.paused .playhead { display: block; }
+.play-icon {
+  position: absolute;
+  right: 4px; bottom: 4px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  line-height: 1;
+  pointer-events: none;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.9);
+}
+
+@media (max-width: 640px) {
+  .abstract { padding-left: 0; padding-right: 0; }
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .spec img { height: 64px; }
+}
+
+/* ---------- citation ---------- */
+.bibtex-wrap { position: relative; }
+.bibtex-block {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 14px 16px;
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+}
+.copy-btn {
+  position: absolute;
+  top: 8px; right: 8px;
+  font-size: 0.75rem;
+  padding: 2px 10px;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  background: #fff;
+  color: #007bff;
+  cursor: pointer;
+}
+.copy-btn:hover { background: #007bff; color: #fff; }
+.copy-btn.copied { background: #28a745; border-color: #28a745; color: #fff; }

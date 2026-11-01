@@ -1,0 +1,152 @@
+{
+ "versions": [
+  {
+   "key": "noisy",
+   "label": "Noisy input"
+  },
+  {
+   "key": "biodenoising",
+   "label": "Biodenoising"
+  },
+  {
+   "key": "teacher",
+   "label": "SAM-Audio<sub>VAD</sub> (teacher)"
+  },
+  {
+   "key": "callcleaner",
+   "label": "CallCleaner (ours)"
+  },
+  {
+   "key": "clean",
+   "label": "Clean reference"
+  }
+ ],
+ "examples": [
+  {
+   "id": "12_terrestrial",
+   "title": "Nightingale",
+   "note": "woodland with a passing plane",
+   "snr": 0,
+   "duration": 5.2,
+   "clean": {
+    "id": "365663",
+    "user": "matrixxx",
+    "url": "https://freesound.org/s/365663/",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "noise": {
+    "id": "150190",
+    "user": "Berwitz",
+    "url": "https://freesound.org/s/150190/",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/"
+   }
+  },
+  {
+   "id": "9_terrestrial",
+   "title": "Horse",
+   "note": "forest at dawn (birds, insects)",
+   "snr": 0,
+   "duration": 18.5,
+   "clean": {
+    "id": "319330",
+    "user": "ylearkisto",
+    "url": "https://freesound.org/s/319330/",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/"
+   },
+   "noise": {
+    "id": "328296",
+    "user": "felix.blume",
+    "url": "https://freesound.org/s/328296/",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   }
+  },
+  {
+   "id": "11_terrestrial",
+   "title": "Tiger",
+   "note": "jungle at twilight",
+   "snr": 0,
+   "duration": 11.3,
+   "clean": {
+    "id": "347258",
+    "user": "jeremywen",
+    "url": "https://freesound.org/s/347258/",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/"
+   },
+   "noise": {
+    "id": "398216",
+    "user": "jujulj",
+    "url": "https://freesound.org/s/398216/",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   }
+  },
+  {
+   "id": "36_underwater",
+   "title": "Dolphin",
+   "note": "boat noise, underwater",
+   "snr": 0,
+   "duration": 4.0,
+   "clean": {
+    "id": "667080",
+    "user": "leeble",
+    "url": "https://freesound.org/s/667080/",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/"
+   },
+   "noise": {
+    "id": "382001",
+    "user": "XiiiSamples",
+    "url": "https://freesound.org/s/382001/",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   }
+  },
+  {
+   "id": "46_terrestrial",
+   "title": "Chicken",
+   "note": "air-conditioning room tone",
+   "snr": 0,
+   "duration": 6.4,
+   "clean": {
+    "id": "88478",
+    "user": "davidou",
+    "url": "https://freesound.org/s/88478/",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "noise": {
+    "id": "652477",
+    "user": "mbezzola",
+    "url": "https://freesound.org/s/652477/",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   }
+  },
+  {
+   "id": "32_terrestrial",
+   "title": "Cat",
+   "note": "jungle at twilight; the teacher fails here, its student does not",
+   "snr": 0,
+   "duration": 12.9,
+   "clean": {
+    "id": "656619",
+    "user": "kinoton",
+    "url": "https://freesound.org/s/656619/",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   },
+   "noise": {
+    "id": "398216",
+    "user": "jujulj",
+    "url": "https://freesound.org/s/398216/",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+   }
+  }
+ ]
+}

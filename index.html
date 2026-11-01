@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CallCleaner: Lightweight Bioacoustic Denoising from an Audio Foundation Model</title>
+  <meta name="description" content="CallCleaner: a 19M-parameter animal vocalization denoiser distilled from SAM-Audio, running ~90x faster than real time on a laptop CPU." />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="container" style="max-width:860px">
+
+<!-- HERO -->
+<div class="row mt-5 mb-2">
+  <div class="col text-center">
+    <p class="h2 font-weight-bold">CallCleaner</p>
+    <p class="h4 font-weight-normal">Lightweight Bioacoustic Denoising from an Audio Foundation Model</p>
+  </div>
+</div>
+
+<div class="row mb-2">
+  <div class="col text-center h6 font-weight-bold">
+    <!-- TODO: author pages for Michael and Gašper -->
+    <span class="mx-2">Michael Xie<sup>1</sup></span>
+    <span class="mx-2">Ga&scaron;per Begu&scaron;<sup>1</sup></span>
+    <span class="mx-2"><a href="https://morrisalp.github.io/">Morris Alper</a><sup>2</sup></span>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col text-center">
+    <p class="h6 text-muted">
+      <sup>1</sup>University of California, Berkeley &nbsp;&middot;&nbsp;
+      <sup>2</sup>University of Miami
+    </p>
+  </div>
+</div>
+
+<div class="row mb-5">
+  <div class="col text-center">
+    <!-- TODO: arXiv, GitHub and Hugging Face links once released -->
+    <a class="btn btn-outline-primary mx-1 disabled" role="button" aria-disabled="true">
+      <i class="ai ai-arxiv"></i> Paper <small>(soon)</small>
+    </a>
+    <a class="btn btn-outline-primary mx-1 disabled" role="button" aria-disabled="true">
+      <i class="fa fa-github"></i> Code <small>(soon)</small>
+    </a>
+    <a class="btn btn-outline-primary mx-1 disabled" role="button" aria-disabled="true">
+      &#129303; Model <small>(soon)</small>
+    </a>
+    <a href="#examples" class="btn btn-outline-primary mx-1" role="button">
+      <i class="fa fa-volume-up"></i> Listen
+    </a>
+  </div>
+</div>
+
+<!-- TL;DR + OVERVIEW -->
+<div class="row mb-2">
+  <div class="col">
+    <p class="tldr">
+      <strong>TL;DR:</strong> Prompted with call time spans from a simple animal detector, the audio foundation
+      model <strong>SAM-Audio</strong> removes more background noise from animal vocalizations than dedicated
+      denoisers. We distill it into <strong>CallCleaner</strong>, a 19M-parameter denoiser that needs no detector
+      and runs ~90&times; faster than real time on a laptop CPU.
+    </p>
+    <figure class="figure-wide">
+      <img src="assets/overview.png" class="img-fluid" alt="Method overview: (a) SAM-Audio with and without VAD spans; (b) distillation into CallCleaner" />
+      <figcaption class="text-muted small mt-2">
+        <strong>(a)</strong> Prompted with &ldquo;animal sound&rdquo; alone, SAM-Audio misses most of this horse call;
+        prompted with time spans from a simple animal VAD, it recovers the call.
+        <strong>(b)</strong> Its outputs on unlabeled field audio become training targets for a small, fast,
+        detector-free student, CallCleaner.
+      </figcaption>
+    </figure>
+  </div>
+</div>
+<hr>
+
+<!-- ABSTRACT -->
+<div class="row mb-4">
+  <div class="col">
+    <p class="h4 font-weight-bold title">Abstract</p>
+    <p class="abstract">
+      Many studies of animal vocalizations require clean recordings, but animals are usually recorded in the field,
+      with background noise from weather, vehicles, and other animals. <em>Animal vocalization denoising</em> is
+      challenged by the scarcity of clean training data and the extreme diversity of animal vocalizations.
+      <span id="abstract-more" style="display:none">
+      Classical spectral gates leave residual noise, especially without voice activity detection (VAD), while
+      detector-free neural denoisers designed for bioacoustics remove less noise. We show that a general-purpose
+      source separation foundation model, SAM-Audio, removes more noise than both without training when prompted
+      with time spans from a simple animal VAD. To turn this heavy method into a practical tool, we distill it into
+      <strong>CallCleaner</strong>, a 19M-parameter denoiser that needs no detector and runs ~90&times; faster than
+      real time on a laptop CPU. We find that SI-SDR has limited utility in our setting as it penalizes regenerated
+      output and conflates noise removal with call fidelity, a trade-off our separate metrics reveal. CallCleaner
+      leaves 11&nbsp;dB less noise around the call than the prior open state-of-the-art neural denoiser
+      Biodenoising, and among fast, CPU-capable systems it pushes the Pareto frontier of noise removal vs. call
+      fidelity, without requiring a detector. We will publicly release code and weights for CallCleaner, which
+      enables fast, private, local denoising of single-caller recordings without specialized hardware.
+      </span>
+      <button class="btn btn-link btn-sm p-0 align-baseline" id="abstract-toggle">Read more</button>
+    </p>
+  </div>
+</div>
+<hr>
+
+<!-- AUDIO EXAMPLES -->
+<div id="examples" class="row mt-4 mb-2">
+  <div class="col">
+    <p class="h4 font-weight-bold title">Audio Examples</p>
+    <p class="text-break">
+      Clean animal calls mixed with real field noise at 0&nbsp;dB SNR, from the
+      <a href="https://earthspecies.github.io/biodenoising/">Biodenoising</a> benchmark.
+      <strong>Click a spectrogram to play it</strong> (click again to pause; click elsewhere on it to jump).
+      Each version is peak-normalized; spectrograms span 0&ndash;8&nbsp;kHz, with colors relative to each clip&rsquo;s
+      loudest point. Examples were chosen for variety of animals and noise, and for open licenses, not by score.
+    </p>
+    <div id="example-list">Loading examples&hellip;</div>
+  </div>
+</div>
+<hr>
+
+<!-- RESULTS -->
+<div class="row mt-4 mb-2">
+  <div class="col">
+    <p class="h4 font-weight-bold title">Results</p>
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <figure class="mb-0">
+          <img src="assets/tradeoff.png" class="img-fluid" alt="Noise left around the call vs. call shape error for all systems" />
+        </figure>
+      </div>
+      <div class="col-md-6">
+        <ul class="results-list">
+          <li><strong>11&nbsp;dB less noise</strong> left around the call than Biodenoising (better on 44 of 47 clips), matching its teacher.</li>
+          <li><strong>Rarely fails:</strong> 0.7 catastrophic failures per 188 mixtures vs. 11 for its teacher, and no detector needed.</li>
+          <li><strong>~90&times; faster than real time</strong> on a laptop CPU, at Biodenoising&rsquo;s size (19M parameters).</li>
+          <li><strong>Trade-off:</strong> given a detector, a smoothed spectral gate keeps the call&rsquo;s shape better; CallCleaner removes more noise without one.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="text-muted small mt-2">
+      Benchmark medians over 47 clips &times; 4 SNRs. Lower is better on both axes; marker size grows with model size.
+      Dashed: Pareto frontier over all systems; solid: over systems that run faster than real time on a laptop CPU.
+    </p>
+  </div>
+</div>
+<hr>
+
+<!-- CITATION -->
+<div class="row mt-4 mb-4">
+  <div class="col">
+    <p class="h4 font-weight-bold title">Citation</p>
+    <div class="bibtex-wrap">
+      <button class="copy-btn" id="copy-bibtex">Copy</button>
+      <!-- TODO: arXiv id -->
+      <pre class="bibtex-block" id="bibtex-text">@article{xie2026callcleaner,
+  title   = {CallCleaner: Lightweight Bioacoustic Denoising from an Audio Foundation Model},
+  author  = {Michael Xie and Ga{\v{s}}per Begu{\v{s}} and Morris Alper},
+  journal = {arXiv preprint},
+  year    = {2026}
+}</pre>
+    </div>
+  </div>
+</div>
+<hr>
+
+<!-- CREDITS -->
+<div class="row mt-2 mb-5">
+  <div class="col">
+    <p class="h6 font-weight-bold">Audio credits</p>
+    <p class="text-muted small mb-1">
+      Mixtures from the Biodenoising benchmark (Miron et al., ICASSP 2025; for educational, non-commercial use).
+      Original recordings from <a href="https://freesound.org">freesound.org</a>; outputs are derivatives of these mixtures.
+    </p>
+    <ul id="credits" class="text-muted small"></ul>
+  </div>
+</div>
+
+<script src="page.js"></script>
+</body>
+</html>
