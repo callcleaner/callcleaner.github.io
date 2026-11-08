@@ -89,15 +89,15 @@
       <span id="abstract-more" style="display:none">
       Classical spectral gates leave residual noise, especially without voice activity detection (VAD), while
       detector-free neural denoisers designed for bioacoustics remove less noise. We show that a general-purpose
-      source separation foundation model, SAM-Audio, removes more noise than both without training when prompted
-      with time spans from a simple animal VAD. To turn this heavy method into a practical tool, we distill it into
-      <strong>CallCleaner</strong>, a 19M-parameter denoiser that needs no detector and runs ~90&times; faster than
-      real time on a laptop CPU. We find that SI-SDR has limited utility in our setting as it penalizes regenerated
-      output and conflates noise removal with call fidelity, a trade-off our separate metrics reveal. CallCleaner
-      leaves 11&nbsp;dB less noise around the call than the prior open state-of-the-art neural denoiser
-      Biodenoising, and among fast, CPU-capable systems it pushes the Pareto frontier of noise removal vs. call
-      fidelity, without requiring a detector. We will publicly release code and weights for CallCleaner, which
-      enables fast, private, local denoising of single-caller recordings without specialized hardware.
+      source separation foundation model, SAM-Audio, removes more noise than either of these types of methods, when
+      used without training and prompted with time spans from a simple animal VAD. To turn this heavy method into a
+      practical tool, we distill it into <strong>CallCleaner</strong>, a 19M-parameter denoiser that needs no detector
+      and runs ~90&times; faster than real time on a laptop CPU. We find that SI-SDR has limited utility in our setting
+      as it penalizes regenerated output and conflates noise removal with call fidelity, a trade-off our separate
+      metrics reveal. CallCleaner leaves 11&nbsp;dB less noise around the call than Biodenoising, the leading neural
+      bioacoustic denoiser with public weights, and among fast, CPU-capable systems it pushes the Pareto frontier of
+      noise removal vs. call fidelity, without requiring a detector. We release code and weights for CallCleaner,
+      which enables fast, private, local denoising of single-caller recordings without specialized hardware.
       </span>
       <button class="btn btn-link btn-sm p-0 align-baseline" id="abstract-toggle">Read more</button>
     </p>
