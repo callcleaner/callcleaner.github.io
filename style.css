@@ -23,7 +23,7 @@
 
 .tiles {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 8px;
 }
 .tile { text-align: center; }
@@ -32,9 +32,8 @@
   font-weight: 600;
   color: #495057;
   margin-bottom: 3px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.2;
+  min-height: 2.4em;          /* two lines, so spectrograms stay aligned when a label wraps */
 }
 .tile.ours .tile-label { color: #c45a00; }
 .spec {
@@ -72,7 +71,7 @@
 
 @media (max-width: 640px) {
   .abstract { padding-left: 0; padding-right: 0; }
-  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .spec img { height: 64px; }
 }
 

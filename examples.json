@@ -9,6 +9,10 @@
    "label": "Biodenoising"
   },
   {
+   "key": "gate",
+   "label": "Noisereduce<sup>s</sup><sub>VAD</sub> (gate)"
+  },
+  {
    "key": "teacher",
    "label": "SAM-Audio<sub>VAD</sub> (teacher)"
   },
